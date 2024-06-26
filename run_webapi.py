@@ -15,7 +15,7 @@ model = None
 @app.on_event("startup")
 async def startup_event():
     global model
-    modelurl = 'https://models.silero.ai/models/tts/ru/v3_1_ru.pt'
+    modelurl = 'https://models.silero.ai/models/tts/ru/v4_ru.pt'
 
     import os
     import torch

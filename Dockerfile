@@ -3,7 +3,7 @@ FROM --platform=$BUILDPLATFORM curlimages/curl:7.85.0 as silero-downloader
 
 WORKDIR /home/downloader/models
 
-RUN curl https://models.silero.ai/models/tts/ru/v3_1_ru.pt -o ./silero_model.pt
+RUN curl https://models.silero.ai/models/tts/ru/v4_ru.pt -o ./silero_model.pt
 
 FROM python:3.9-slim-bullseye
 

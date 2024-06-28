@@ -21,7 +21,7 @@ async def startup_event():
     import torch
 
     device = torch.device('cpu')
-    torch.set_num_threads(1)
+    torch.set_num_threads(4)
     local_file = 'silero_model.pt'
 
     if not os.path.isfile(local_file):
@@ -50,7 +50,7 @@ async def startup_event():
     # https://github.com/tiangolo/fastapi/issues/3258
     response_class=Response
 )
-async def getwav(text_to_speech:str, speaker:str="xenia", sample_rate:int=24000, put_accent:int = 1, put_yo:int = 1):
+async def getwav(text_to_speech:str, speaker:str="xenia", sample_rate:int=24000):
     """
        Return WAV file with rendered text
 
@@ -60,9 +60,7 @@ async def getwav(text_to_speech:str, speaker:str="xenia", sample_rate:int=24000,
 
        :param int sample_rate: Sample rate to generation
 
-       :param int put_accent: 1/0, 1 - простановка акцентов в тексте
 
-       :param int put_yo: 1/0, 1 - простановка Ё в тексте
 
        :return: WAV file
        """
@@ -71,8 +69,6 @@ async def getwav(text_to_speech:str, speaker:str="xenia", sample_rate:int=24000,
     wavfile = "temp.wav"
     path = model.save_wav(text=text_to_speech,
                                speaker=speaker,
-                               put_accent=(put_accent==1),
-                               put_yo=( put_yo==1),
                                sample_rate=sample_rate)
 
     # перемещаем wav на новое место
